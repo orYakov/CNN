@@ -112,7 +112,7 @@ def test_the_model(model, data_set_of_test, test_loader):
     for spec in spects:
         temp = spec[0].split('/')  # split the line
         # the name that end with wav
-        temp = temp[3]
+        temp = temp[2]
         file_names.append(temp)
 
     # set the model to test mode
