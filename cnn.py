@@ -81,7 +81,7 @@ def train(num_epochs, optimizer, train_loader, model, criterion):
             acc_list.append(correct / total)
 
             # print the status every 100 inputs
-            if (i + 1) % 100 == 0:
+            if (i + 1) % 10 == 0:
                 print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%'
                       .format(epoch + 1, num_epochs, i + 1, total_step, loss.item(),
                               (correct / total) * 100))
@@ -166,10 +166,13 @@ def main():
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     # train and predict
+    print("training...")
     train(num_epochs, optimizer, train_loader, model, criterion)
+    print("predict_on_dev...")
     predict_on_dev(model, valid_loader)
 
     # test the model
+    print("testing...")
     test_the_model(model, dataset, test_loader)
 
 
