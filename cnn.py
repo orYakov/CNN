@@ -62,10 +62,10 @@ def train(num_epochs, optimizer, train_loader, model, criterion):
     acc_list = []
     model.train()  # set the model to train mode
     for epoch in range(num_epochs):
-        for i, (images, labels) in enumerate(train_loader):
-            images, labels = images.to(device), labels.to(device)
+        for i, (items, labels) in enumerate(train_loader):
+            items, labels = items.to(device), labels.to(device)
             # Run the forward pass
-            outputs = model(images)
+            outputs = model(items)
             loss = criterion(outputs, labels)
             loss_list.append(loss.item())
 
@@ -94,14 +94,14 @@ def predict_on_validation(model, valid_loader):
     with torch.no_grad():
         correct = 0
         total = 0
-        for images, labels in valid_loader:
-            images, labels = images.to(device), labels.to(device)
-            outputs = model(images)
+        for items, labels in valid_loader:
+            items, labels = items.to(device), labels.to(device)
+            outputs = model(items)
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
 
-        print('Test Accuracy of the model on the 10000 test images: {} %'.format((correct / total) * 100))
+        print('Test Accuracy of the model: {} %'.format((correct / total) * 100))
 
 
 # a function to tet the model and write the answers
