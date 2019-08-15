@@ -167,11 +167,11 @@ def main():
     # train and predict
     print("training...")
     train(num_epochs, optimizer, train_loader, model, criterion)
-    print("predict_on_validation...")
+    print("predict on validation set...")
     predict_on_validation(model, valid_loader)
 
     # test the model
-    print("testing...")
+    print("testing and writing the predictions...")
     test_the_model(model, dataset, test_loader)
     print("done.")
 
