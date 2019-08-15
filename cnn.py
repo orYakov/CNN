@@ -167,7 +167,7 @@ def main():
     # train and predict
     print("training...")
     train(num_epochs, optimizer, train_loader, model, criterion)
-    print("predict on validation set...")
+    print("predicting on validation set...")
     predict_on_validation(model, valid_loader)
 
     # test the model
