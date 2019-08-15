@@ -81,20 +81,20 @@ def train(num_epochs, optimizer, train_loader, model, criterion):
             acc_list.append(correct / total)
 
             # print the status every 100 inputs
-            if (i + 1) % 10 == 0:
+            if (i + 1) % 100 == 0:
                 print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%'
                       .format(epoch + 1, num_epochs, i + 1, total_step, loss.item(),
                               (correct / total) * 100))
 
 
 # try the model on the validation set
-def predict_on_dev(model, dev_loader):
+def predict_on_validation(model, valid_loader):
     model.eval()  # set the model to test mode
     # Test the model
     with torch.no_grad():
         correct = 0
         total = 0
-        for images, labels in dev_loader:
+        for images, labels in valid_loader:
             images, labels = images.to(device), labels.to(device)
             outputs = model(images)
             _, predicted = torch.max(outputs.data, 1)
@@ -121,7 +121,6 @@ def test_the_model(model, data_set_of_test, test_loader):
     with torch.no_grad():
         for the_inputs, the_answers in test_loader:
             the_inputs = the_inputs.to(device)
-            # the_answers = the_answers.to(device)
             the_outputs = model(the_inputs)
             _, predicted = torch.max(the_outputs.data, 1)
             array_of_predictions.extend(predicted.tolist())
@@ -138,7 +137,7 @@ def test_the_model(model, data_set_of_test, test_loader):
 
 
 def load_data_for_test(directory):
-    dir_path = directory
+    dir_path = "data/" + directory
     data_set = GCommandLoader(dir_path)
     test_loader = torch.utils.data.DataLoader(
         data_set, batch_size=100, shuffle=None,
@@ -168,12 +167,13 @@ def main():
     # train and predict
     print("training...")
     train(num_epochs, optimizer, train_loader, model, criterion)
-    print("predict_on_dev...")
-    predict_on_dev(model, valid_loader)
+    print("predict_on_validation...")
+    predict_on_validation(model, valid_loader)
 
     # test the model
     print("testing...")
     test_the_model(model, dataset, test_loader)
+    print("done.")
 
 
 if __name__ == '__main__':
