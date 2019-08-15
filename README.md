@@ -1,7 +1,7 @@
 # CNN
 ## Program Description
 The algorithm implemented in this program is CNN.  
-The goal of the network is to recieve a sound file and predict which word is expressed in it (out of a limited set of words).  
+The goal of the network is to receive a sound file and predict which word is expressed in it (out of a limited set of words).  
 The program extracts the sound files and their labels, and treats them as matrices and vectors respectively.  
 It continues with defining the model - the layers, the convolution values, the activation function, and the forward function.  
 Afterwards, the program executes the training process on the training set, using some built-in functions of PyTorch.  
